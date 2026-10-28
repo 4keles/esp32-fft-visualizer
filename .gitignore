@@ -1,0 +1,45 @@
+# Build output
+build/
+build-*/
+firmware/fftviz/build/
+__pycache__/
+*.pyc
+*.o
+*.elf
+*.bin
+*.map
+*.fvota
+
+# Local configuration and secrets
+firmware/fftviz/user_config.h
+.wifi-env
+**/.wifi-env
+.env
+.env.*
+.venv/
+tools/.venv/
+*.pem
+*.key
+
+# Audio and recordings
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.ogg
+*.aac
+*.pcm
+*.i16
+
+# Private and process folders
+/.claude
+/openspec
+/specs
+/task-photos
+/hardware_photos
+/yeni-eleman-resimleri
+
+# Editor and OS files
+.DS_Store
+.idea/
+.vscode/

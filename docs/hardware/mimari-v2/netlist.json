@@ -1,0 +1,1475 @@
+{
+ "meta": {
+  "proje": "ESP32 FFT görselleştirici: delikli plaket mimarisi v2",
+  "sürüm": "2.3",
+  "tarih": "2026-10-20",
+  "not": "SINGLE SOURCE OF TRUTH. The schematic and perfboard drawings in this directory were generated from this file; nothing drawn by hand may contradict it.",
+  "etiketler": {
+   "[db]": "row of the project's component inventory (not part of this repository)",
+   "[VS]": "datasheet card of the project's component inventory (not part of this repository)",
+   "[hesap]": "calculated with the formulas used in this project",
+   "[doğrulanmadı]": "okunmadı veya ölçülmedi; kullanıcı ölçmeli / teyit etmeli",
+   "[okundu]": "parça üzerindeki yazıdan okundu"
+  },
+  "ızgara_mm": 2.54,
+  "construction": {
+   "population": "Every listed reference: quantity 1, fitted and on hand.",
+   "terminal_assemblies": {"J1": {"fixed": 1, "plug": 1}, "J2": {"fixed": 1, "plug": 1}},
+   "accessories": {"F1_holder": 1, "IR_handset_17_key": 1},
+   "backbone_mm2": 1.5,
+   "backbone_solid_diameter_mm": 1.382,
+   "signal_awg": 24,
+   "signal_mm2": 0.205,
+   "wire_length_source": "Placement wire schedule includes cut allowance; external runs require user measurement.",
+   "fault_regime": "3.8 A PSU and T5 A fuse; software limiter is not fault protection.",
+   "termination": "One wire per plug screw, at most two wires per solder joint. An off-board component lead joined to a wire joint (C1 at the STRIP1 pads) counts as a conductor; a part's own lead in its own perfboard hole does not. The 1.5 mm² backbone is fully off-board: J1/J2 plug screws, F1 and SW1 lugs, pin tails of the off-board J1/J2 headers, PSU and strip ends. The perfboard receives only 24 AWG feeds (SW1.1, SW1.2 and J1.4 tail) and the DIN wire; never force 1.5 mm² through perfboard holes.",
+   "header_support": "J1/J2 header bodies are fixed to a rigid point (enclosure wall or a free perfboard corner hole; cable tie or glue) so plug force never reaches the pin joints; every pin-tail joint is sleeved with heat-shrink; every 1.5 mm² wire is tied within about 30 mm of its header; plugs are mated or unmated only with the supply off while holding the header body.",
+   "plug_key": {
+    "header_pin_removed": 2,
+    "plug_cavity_filled": 2,
+    "labels": {"J1": "J1 PSU", "J2": "J2 STRIP"},
+    "note": "J1 header's spare pin 2 is cut and cavity 2 of the PSU plug is filled; J2.2 (DIN pin, used) then blocks the PSU plug from seating on J2 [doğrulanmadı: T11927 cavity geometry; K8 dry-fit]. Labels and the K8 identification test apply in any case."
+   }
+  },
+  "yapılandırmalar": {
+   "base": "Core-only diagnostic view; not a construction alternative.",
+   "B": "Fully fitted B; every listed reference is fitted. K checks verify physical identity."
+  },
+  "köşeler": {
+   "psu_v": [
+    4.9,
+    5.0,
+    5.2
+   ],
+   "açıklama": "PSU çıkış gerilimi kullanıcı tarafından ölçülecek [doğrulanmadı]; 5,3 V şerit üst sınırı (VS-05)"
+  },
+  "varsayımlar": {
+   "ampasite_a": {
+    "0.25": 2.1,
+    "0.34": 3.0,
+    "0.5": 5.0,
+    "0.75": 7.0,
+    "1.0": 9.0
+    ,"1.5": 12.0
+   },
+   "ampasite_kaynak": "[doğrulanmadı] muhafazakâr tek damar güç teli tablosu (AWG24 2,1 A … AWG18 7 A); gerilim düşümü ayrıca sınırlanır",
+   "ro_ohm_mm2_m": 0.0175,
+   "psu_akim_a": 3.8,
+   "model_akim_a": 2.5,
+   "esp_akim_a": 0.6,
+   "hc00_akim_a": 0.0005,
+   "ldo_dusum_v": 1.05,
+   "ldo_dusum_kaynak": "[doğrulanmadı] AMS1117-3.3 tipik 1,0-1,3 V; veri sayfası bu oturumda açılmadı",
+   "d3_vf_v": 0.4,
+   "usb_vbus_v": [
+    4.75,
+    5.25
+   ],
+   "vf_1n4007": [
+    [
+     0.0001,
+     0.45
+    ],
+    [
+     0.001,
+     0.55
+    ],
+    [
+     0.01,
+     0.64
+    ],
+    [
+     0.1,
+     0.75
+    ],
+    [
+     1.0,
+     0.93
+    ]
+   ],
+   "vf_1n5819": [
+    [
+     0.001,
+     0.15
+    ],
+    [
+     0.01,
+     0.22
+    ],
+    [
+     0.1,
+     0.3
+    ],
+    [
+     1.0,
+     0.45
+    ]
+   ],
+   "vf_kaynak": "[doğrulanmadı] genel tipik eğriler; plakette ölçülecek (Test 3, Test 5)",
+   "usb_notu": "D2 USB→şerit yolunu keser, PSU→PC geri beslemesini kesmez. PC bağlı değilken T9 ile VBUS ve kart D3 yönünü teyit edin; belirsizse PSU+PC birlikte bağlanmaz. Programlama için U1 bütün dış bağlantılardan ayrılır."
+  },
+  "sınıflar": {
+   "Z": "ZORUNLU: olmazsa devre çalışmaz ya da kararlı çalışmaz",
+   "E1": "On-hand supplementary parts; all fitted in B.",
+   "E2": "On-hand protection parts; all fitted, physical identity requires K acceptance.",
+   "Ö": "Feature provenance; SW1, IR1 and ANT1 are fitted."
+  },
+  "bloklar": {
+   "B1": "GÜÇ: PSU girişi, V5 dağıtımı, yıldız GND (kalın tel)",
+   "B2": "LED SÜRÜCÜ: 74HC00 seviye çevirici, DIN seri direnci, şerit çıkışı",
+   "B3": "DENETLEYİCİ: ESP32 + ekran",
+   "B4": "MİKROFON: MAX4466 + ADC süzgeci",
+   "B5": "IR receiver and external antenna"
+  },
+  "mekanik": {
+   "mikrofon_sünger": "Mikrofon başına kesilmiş sünger (rüzgâr/üfleme/hava gürültüsü): ücretsiz, mekanik; elektrik şemasında yok"
+  },
+  "ref_eşlemesi": {
+   "D4": "D_H1",
+   "D5": "D_H2",
+   "D2": "D_E",
+   "D1": "D_R",
+   "R3": "RS_SCK",
+   "R4": "RS_SDA",
+   "R5": "RS_DC",
+   "R2": "R_PD",
+   "R1": "R_S",
+   "R6": "R_A",
+   "R7": "R_M",
+   "R8": "R_L",
+   "C4": "C_M1",
+   "C5": "C_M2",
+   "C2": "C_H",
+   "C3": "C_A",
+   "C6": "C_D",
+   "FB1": "FB_D",
+   "DGND": "GND_D"
+  },
+  "ref_eşlemesi_not": "Yeni ref → eski ad (mimari v2 ilk sürümü). D3 atlandı: ESP32 kartının kendi diyodu D3 ile karışmasın. LED1 ve R_L (V5 var LED'i) kaldırıldı: föyde yer yok, işlev zorunlu değil (isteğe bağlı: V5 → 5,6 kΩ → LED → GND).",
+  "pin_haritası_v2": {
+   "açıklama": "GPIO and GND pin assignment changes for the perfboard layout (see docs/hardware.md). Old to new.",
+   "gpio": {
+    "BLK": {
+     "eski": 4,
+     "yeni": 19
+    },
+    "IR": {
+     "eski": "yok (planlı 16)",
+     "yeni": 16
+    }
+   },
+   "gnd": {
+    "GND (mantık kolu)": {
+     "eski": "GND_B18",
+     "yeni": "GND_T5"
+    },
+    "AGND": {
+     "eski": "GND_T5",
+     "yeni": "GND_B18"
+    },
+    "DGND": {
+     "eski": "GND_B12",
+     "yeni": "GND_B12"
+    }
+   },
+   "diğer": "GPIO4 externally NC. Remote-only firmware removes all SW2 consumers before configuring INPUT_PULLDOWN; GPIO4 has no read, interrupt, output or PWM role. BLK19 and IR16 remain unchanged."
+  }
+ },
+ "library": {
+  "ESP32_DEVKIT38": {
+   "açıklama": "ESP32 DevKit 38 pin (DevKitC V4 düzeni) [okundu: modül baskısı]. USB solda, anten sağda bakışta: üst sıra soldan sağa T0..T18, alt sıra B0..B18",
+   "satırlar": {
+    "T": [
+     "5V",
+     "CMD",
+     "D3",
+     "D2",
+     "IO13",
+     "GND_T5",
+     "IO12",
+     "IO14",
+     "IO27",
+     "IO26",
+     "IO25",
+     "IO33",
+     "IO32",
+     "IO35",
+     "IO34",
+     "VN",
+     "VP",
+     "EN",
+     "3V3"
+    ],
+    "B": [
+     "CLK",
+     "D0",
+     "D1",
+     "IO15",
+     "IO2",
+     "IO0",
+     "IO4",
+     "IO16",
+     "IO17",
+     "IO5",
+     "IO18",
+     "IO19",
+     "GND_B12",
+     "IO21",
+     "RX0",
+     "TX0",
+     "IO22",
+     "IO23",
+     "GND_B18"
+    ]
+   },
+   "gpio": {
+    "CMD": 11,
+    "D3": 10,
+    "D2": 9,
+    "CLK": 6,
+    "D0": 7,
+    "D1": 8,
+    "IO13": 13,
+    "IO12": 12,
+    "IO14": 14,
+    "IO27": 27,
+    "IO26": 26,
+    "IO25": 25,
+    "IO33": 33,
+    "IO32": 32,
+    "IO35": 35,
+    "IO34": 34,
+    "VN": 39,
+    "VP": 36,
+    "IO15": 15,
+    "IO2": 2,
+    "IO0": 0,
+    "IO4": 4,
+    "IO16": 16,
+    "IO17": 17,
+    "IO5": 5,
+    "IO18": 18,
+    "IO19": 19,
+    "RX0": 3,
+    "TX0": 1,
+    "IO21": 21,
+    "IO22": 22,
+    "IO23": 23
+   },
+   "flaş": [
+    "CMD",
+    "D3",
+    "D2",
+    "CLK",
+    "D0",
+    "D1"
+   ],
+   "strapping": [
+    "IO0",
+    "IO2",
+    "IO5",
+    "IO12",
+    "IO15"
+   ],
+   "yalnız_giriş": [
+    "IO34",
+    "IO35",
+    "VN",
+    "VP"
+   ],
+   "uart0": [
+    "RX0",
+    "TX0"
+   ],
+   "güç": {
+    "5V": "power_io",
+    "3V3": "power_out",
+    "GND_T5": "gnd",
+    "GND_B12": "gnd",
+    "GND_B18": "gnd"
+   },
+   "dahili_eşdeğer": [
+    [
+     "GND_T5",
+     "GND_B12",
+     "GND_B18"
+    ]
+   ],
+   "dahili_eşdeğer_not": "Kart üzerindeki GND düzlemi: üç GND pini içeride tek düğümdür. Plaket üzerinde birbirine tel bağlanmaz.",
+   "vdd_pin": "3V3",
+   "gpio_özellik": {
+    "vih_frac": 0.75,
+    "vil_frac": 0.25,
+    "vmax_abs": 3.6,
+    "voh": "vdd",
+    "src": "[VS-01] VIH ≥ 0,75·VDD; mutlak üst VDD+0,3 V"
+   },
+   "sürücü_ma_maks": 40,
+   "5v_aralık_v": [
+    4.35,
+    6.0
+   ],
+   "5v_kaynak": "[hesap] alt sınır = 3,3 V + LDO düşümü 1,05 V (AMS1117-3.3, [doğrulanmadı]); kart üstündeki D3 Schottky varlığı bilinmiyor"
+  },
+  "HC00_DIP14": {
+   "açıklama": "SN74HC00N, dört 2 girişli NAND [db IC-01, VS-06]. Pin 1 çentik yanında; alt sıra 1..7, üst sıra 14..8",
+   "pinler": {
+    "1": {
+     "ad": "1A",
+     "tip": "in"
+    },
+    "2": {
+     "ad": "1B",
+     "tip": "in"
+    },
+    "3": {
+     "ad": "1Y",
+     "tip": "out"
+    },
+    "4": {
+     "ad": "2A",
+     "tip": "in"
+    },
+    "5": {
+     "ad": "2B",
+     "tip": "in"
+    },
+    "6": {
+     "ad": "2Y",
+     "tip": "out"
+    },
+    "7": {
+     "ad": "GND",
+     "tip": "gnd"
+    },
+    "8": {
+     "ad": "3Y",
+     "tip": "out"
+    },
+    "9": {
+     "ad": "3A",
+     "tip": "in"
+    },
+    "10": {
+     "ad": "3B",
+     "tip": "in"
+    },
+    "11": {
+     "ad": "4Y",
+     "tip": "out"
+    },
+    "12": {
+     "ad": "4A",
+     "tip": "in"
+    },
+    "13": {
+     "ad": "4B",
+     "tip": "in"
+    },
+    "14": {
+     "ad": "VCC",
+     "tip": "power_in",
+     "v": [
+      2.0,
+      6.0
+     ]
+    }
+   },
+   "mantık": {
+    "vih_frac": 0.7,
+    "vil_frac": 0.3,
+    "vmax_abs": "vcc+0.5",
+    "voh": "vcc-0.05",
+    "src": "[VS-06] VIH(min)=0,7·Vcc; Vcc 2-6 V"
+   },
+   "vcc_pin": "14"
+  },
+  "TERM4_508": {
+   "açıklama": "5,08 mm geçmeli klemens erkek başlık, 4 pin [db CON-01/02/03, VS-20]; kutup başına ≈ 10 A [VS-20 genel bilgi]",
+   "pinler": {
+    "1": {
+     "tip": "passive"
+    },
+    "2": {
+     "tip": "passive"
+    },
+    "3": {
+     "tip": "passive"
+    },
+    "4": {
+     "tip": "passive"
+    }
+   },
+   "pin_a_maks": 10.0
+  },
+  "PSU_5V": {
+   "açıklama": "Cortex MA-0504A, 5 V 3,8 A [db PSU-01, VS-22]",
+   "pinler": {
+    "+5V": {
+     "tip": "power_out",
+     "v": [
+      4.9,
+      5.2
+     ]
+    },
+    "COM": {
+     "tip": "gnd"
+    }
+   },
+   "akım_a": 3.8
+  },
+  "STRIP_WS2812B": {
+   "açıklama": "WS2812B 2 m, 120 LED [db STR-01, VS-05]",
+   "pinler": {
+    "+5V": {
+     "tip": "power_in",
+     "v": [
+      3.5,
+      5.3
+     ],
+     "i_maks_a": 3.4
+    },
+    "DIN": {
+     "tip": "in"
+    },
+    "GND": {
+     "tip": "gnd"
+    }
+   },
+   "mantık": {
+    "vih_frac": 0.7,
+    "vil_frac": 0.3,
+    "vmax_abs": "vdd+0.5",
+    "src": "[VS-05] VIH ≥ 0,7·VDD; VDD 3,5-5,3 V"
+   },
+   "vdd_pin": "+5V"
+  },
+  "TFT_ST7789": {
+   "açıklama": "1,3″ ST7789 240×240 modül GMT130-V1.0 [db MOD-02, VS-02]; pin sırası GND VCC SCK SDA RES DC BLK",
+   "pinler": {
+    "GND": {
+     "tip": "gnd"
+    },
+    "VCC": {
+     "tip": "power_in",
+     "v": [
+      3.0,
+      3.6
+     ],
+     "i_maks_a": 0.06
+    },
+    "SCK": {
+     "tip": "in"
+    },
+    "SDA": {
+     "tip": "in"
+    },
+    "RES": {
+     "tip": "in"
+    },
+    "DC": {
+     "tip": "in"
+    },
+    "BLK": {
+     "tip": "in"
+    }
+   },
+   "mantık": {
+    "vih_frac": 0.7,
+    "vil_frac": 0.3,
+    "vmax_abs": 3.6,
+    "src": "[doğrulanmadı] 3,3 V mantık; sınır tahmini"
+   },
+   "vdd_pin": "VCC"
+  },
+  "MIC_MAX4466": {
+   "açıklama": "MAX4466 mikrofon modülü [db MOD-03, VS-03]; OUT, GND, VCC",
+   "pinler": {
+    "OUT": {
+     "tip": "out"
+    },
+    "GND": {
+     "tip": "gnd"
+    },
+    "VCC": {
+     "tip": "power_in",
+     "v": [
+      2.4,
+      5.5
+     ],
+     "i_maks_a": 0.002
+    }
+   },
+   "mantık": {
+    "voh": "vcc*0.5+0.5",
+    "src": "[VS-03] çıkış VCC/2 civarı bias; sinyal tepe ≤ VCC"
+   },
+   "vdd_pin": "VCC"
+  },
+  "IR_RX3": {
+   "açıklama": "3 telli IR alıcı modülü, 38 kHz [db MOD-04, VS-04]; PIN SIRASI [doğrulanmadı]: modül üstündeki baskıdan (S, orta, −) kullanıcı teyit eder",
+   "pinler": {
+    "VCC": {
+     "tip": "power_in",
+     "v": [
+      2.7,
+      5.5
+     ],
+     "i_maks_a": 0.002
+    },
+    "GND": {
+     "tip": "gnd"
+    },
+    "OUT": {
+     "tip": "out"
+    }
+   },
+   "mantık": {
+    "voh": "vcc",
+    "src": "[VS-04] boşta HIGH, ışıkta aktif LOW"
+   },
+   "vdd_pin": "VCC"
+  },
+  "SW_SPST": {
+   "açıklama": "Yuvarlak ışıklı rocker SPST, 6 A 250 V AC / 10 A 125 V AC, 3 bacak (üçüncü bacak lamba, bağlanmaz) [db SW-01, VS-18]",
+   "pinler": {
+    "1": {
+     "tip": "passive"
+    },
+    "2": {
+     "tip": "passive"
+    }
+   },
+   "akım_a": 6.0
+  },
+  "ANTENNA": {
+   "açıklama": "External RF accessory; connection is recorded separately from DC nets.",
+   "pinler": {}
+  },
+  "FERRITE": {
+   "açıklama": "Through-hole axial ferrite",
+   "pinler": {"1": {"tip": "passive"}, "2": {"tip": "passive"}}
+  },
+  "R": {
+   "açıklama": "Direnç",
+   "pinler": {
+    "1": {
+     "tip": "passive"
+    },
+    "2": {
+     "tip": "passive"
+    }
+   }
+  },
+  "C": {
+   "açıklama": "Seramik kondansatör",
+   "pinler": {
+    "1": {
+     "tip": "passive"
+    },
+    "2": {
+     "tip": "passive"
+    }
+   }
+  },
+  "C_ELEC": {
+   "açıklama": "Elektrolitik kondansatör (kutuplu)",
+   "pinler": {
+    "+": {
+     "tip": "passive"
+    },
+    "-": {
+     "tip": "passive"
+    }
+   }
+  },
+  "D": {
+   "açıklama": "Diyot (A anot, K katot; katot şeritli uç)",
+   "pinler": {
+    "A": {
+     "tip": "passive"
+    },
+    "K": {
+     "tip": "passive"
+    }
+   }
+  },
+  "LED": {
+   "açıklama": "5 mm LED (uzun bacak A)",
+   "pinler": {
+    "A": {
+     "tip": "passive"
+    },
+    "K": {
+     "tip": "passive"
+    }
+   }
+  },
+  "FUSE": {
+   "açıklama": "T5 A glass fuse with external holder",
+   "pinler": {
+    "1": {
+     "tip": "passive"
+    },
+    "2": {
+     "tip": "passive"
+    }
+   }
+  },
+  "LINK": {
+   "açıklama": "Köprü yeri: varsayılan tel köprü (0 Ω); deney için 47-68 Ω direnç",
+   "pinler": {
+    "1": {
+     "tip": "passive"
+    },
+    "2": {
+     "tip": "passive"
+    }
+   }
+  },
+  "SOCKET_DIP14": {
+   "açıklama": "DIP-14 IC soketi: elektriksel pini yok, U2'nin altına lehimlenir",
+   "pinler": {}
+  }
+ },
+ "parts": {
+  "PSU1": {
+   "tip": "PSU_5V",
+   "db": "PSU-01",
+   "değer": "Cortex MA-0504A 5 V 3,8 A",
+   "fit": "base",
+   "offboard": true,
+   "sınıf": "Z",
+   "blok": "B1",
+   "ad": "GÜÇ KAYNAĞI",
+   "görev": "5 V verir; şerit ve kartı besler.",
+   "elde": "elde",
+   "değer_kısa": "5 V · 3,8 A"
+  },
+  "J1": {
+   "tip": "TERM4_508",
+   "db": "CON-01 + CON-03",
+   "değer": "T11933 erkek 90° + T11927 dişi fiş",
+   "fit": "base",
+   "not": "Off-board in-line connector. Plug screws take the PSU cable (1 = +5V, 3 = COM, one wire per screw). The header stays off the perfboard with its body fixed; pin tails take at most two wires each: 1 to F1.1; 3 and 4 form the GND star (strip return, jumper, 24 AWG board feed); 2 spare NC (pin removed as the plug key). Mate only with J1 labels.",
+   "offboard": true,
+   "konum": "Off-board in-line header; body fixed to a rigid point, pin joints sleeved",
+   "sınıf": "Z",
+   "blok": "B1",
+   "ad": "PSU GİRİŞ KLEMENSİ",
+   "görev": "PSU telini bağlar (+5V, GND).",
+   "elde": "elde",
+   "değer_kısa": "5,08 mm · 4 pin"
+  },
+  "F1": {
+   "tip": "FUSE",
+   "db": "On-hand fuse; K1 identity gate",
+   "değer": "T5 A 5×20 mm glass fuse + holder",
+   "fit": "full",
+   "offboard": true,
+   "tutma_a": 5.0,
+   "not": "1.5 mm² external harness. Fuse/D1 coordination with PSU foldback is unverified; never perform a live short test.",
+   "sınıf": "E2",
+   "blok": "B1",
+   "e2_tutma_a": 5.0,
+   "ad": "SİGORTA 5 A",
+   "görev": "Fault protection; coordination requires acceptance.",
+   "elde": "elde",
+   "konum": "External supported holder",
+   "değer_kısa": "T5 A · 5×20 mm"
+  },
+  "SW1": {
+   "tip": "SW_SPST",
+   "db": "SW-01",
+   "değer": "Panel rocker switch",
+   "fit": "full",
+   "offboard": true,
+   "not": "Identified contacts 1/2 between FUSED and V5; lamp NC, insulated. AC markings do not establish DC suitability; K11 verifies.",
+   "sınıf": "Ö",
+   "blok": "B1",
+   "ö_akım_a": 6.0,
+   "ad": "AÇ/KAPA ANAHTARI",
+   "görev": "+5V ağını açar ve kapar.",
+   "elde": "elde",
+   "konum": "External panel; strain-relieved 1.5 mm² contacts",
+   "değer_kısa": "Rocker · lamp NC"
+  },
+  "D1": {
+   "tip": "D",
+   "db": "D-01",
+   "değer": "1N4007 (crowbar)",
+   "fit": "full",
+   "rol": "crowbar",
+   "not": "E2, F1 sigortasıyla birlikte: ters bağlamada F1'i açtırır. F1 YOKSA TAKMA (kaynağı kısa devre eder)",
+   "sınıf": "E2",
+   "blok": "B1",
+   "ad": "TERS BAĞLAMA DİYODU",
+   "görev": "Ters bağlamada F1'i yakar.",
+   "elde": "elde",
+   "değer_kısa": "1N4007"
+  },
+  "C1": {
+   "tip": "C_ELEC",
+   "db": "CAP-01",
+   "değer": "1000 µF / 16 V",
+   "fit": "full",
+   "v_maks": 16,
+   "not": "Strip input bulk. Off-board: leads soldered to the STRIP1 +5V and GND input pads together with the 1.5 mm² wires (wire + lead = two conductors per joint). Long lead (+) to V5.",
+   "offboard": true,
+   "konum": "STRIP1 input pads",
+   "sınıf": "E1",
+   "blok": "B1",
+   "ad": "ŞERİT KONDANSATÖRÜ",
+   "görev": "Şerit akım darbesini karşılar.",
+   "elde": "elde",
+   "değer_kısa": "1000 µF · 16 V"
+  },
+  "D2": {
+   "tip": "D",
+   "db": "D-06; K2 identity gate",
+   "değer": "1N5819",
+   "fit": "full",
+   "sınıf": "E2",
+   "blok": "B1",
+   "not": "A at switched V5, banded K at ESP5V. D2 blocks USB→şerit feeding; PSU→PC isolation depends on onboard D3 direction and T9, with PC disconnected.",
+   "ad": "ESP32 5V DİYOTU",
+   "görev": "USB'den şerit beslenmesini önler.",
+   "elde": "elde",
+   "konum": "Near U1/C7",
+   "değer_kısa": "1N5819"
+  },
+  "J2": {
+   "tip": "TERM4_508",
+   "db": "CON-01 + CON-03",
+   "değer": "T11933 erkek 90° + T11927 dişi fiş",
+   "fit": "base",
+   "not": "Off-board in-line connector. Strip: 1 = GND, 2 = DIN, 3 = +5V, 4 spare NC (pin left in place, tail sleeved). Plug screws take the strip wires (one per screw); header pin tails take the harness (1 return, 2 DIN from the perfboard, 3 from SW1.2). The PSU plug must not seat here (J2.2 blocks it).",
+   "offboard": true,
+   "konum": "Off-board in-line header; body fixed to a rigid point, pin joints sleeved",
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "ŞERİT KLEMENSİ",
+   "görev": "Şeridi bağlar (GND, DIN, +5V).",
+   "elde": "elde",
+   "değer_kısa": "5,08 mm · 4 pin"
+  },
+  "STRIP1": {
+   "tip": "STRIP_WS2812B",
+   "db": "STR-01",
+   "değer": "WS2812B 2 m / 120 LED",
+   "fit": "base",
+   "offboard": true,
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "WS2812B LED ŞERİT",
+   "görev": "120 LED ile ses görüntüsünü çizer.",
+   "elde": "elde",
+   "değer_kısa": "2 m · 120 LED"
+  },
+  "U2": {
+   "tip": "HC00_DIP14",
+   "db": "IC-01",
+   "değer": "SN74HC00N",
+   "fit": "base",
+   "not": "Seviye çevirici: iki kapı arka arkaya eviren tampon. HCT00 elde yok.",
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "74HC00 SEVİYE ÇEVİRİCİ",
+   "görev": "3,3 V sinyali şerit eşiğine yükseltir.",
+   "elde": "elde",
+   "değer_kısa": "SN74HC00N"
+  },
+  "D4": {
+   "tip": "D",
+   "db": "D-01",
+   "değer": "1N4007",
+   "fit": "base",
+   "rol": "seri",
+   "not": "74HC00 Vcc düşürücü #1",
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "74HC00 DİYOT 1",
+   "görev": "U2 beslemesini 0,7 V düşürür.",
+   "elde": "elde",
+   "değer_kısa": "1N4007"
+  },
+  "D5": {
+   "tip": "D",
+   "db": "D-01",
+   "değer": "1N4007",
+   "fit": "base",
+   "rol": "seri",
+   "not": "74HC00 Vcc düşürücü #2 (marjı dengeler; ölçüm Test 4)",
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "74HC00 DİYOT 2",
+   "görev": "D4'e seri; 0,7 V daha düşürür.",
+   "elde": "elde",
+   "değer_kısa": "1N4007"
+  },
+  "C2": {
+   "tip": "C",
+   "db": "CAP-03",
+   "değer": "47 nF",
+   "fit": "base",
+   "not": "74HC00 Vcc-GND dekuplaj (100 nF yok; 47 nF yeterli, VS-17)",
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "DEKUPLAJ 47 nF",
+   "görev": "U2 besleme gürültüsünü süzer.",
+   "elde": "elde",
+   "değer_kısa": "47 nF"
+  },
+  "R1": {
+   "tip": "R",
+   "db": "RES-02",
+   "değer": "220 Ω",
+   "fit": "base",
+   "not": "Şerit DIN seri direnci (1/8-1/4 W; 5 W'lık olanı KULLANMA)",
+   "sınıf": "Z",
+   "blok": "B2",
+   "ad": "DIN DİRENCİ",
+   "görev": "DIN ağında yansımayı sınırlar.",
+   "elde": "elde",
+   "değer_kısa": "220 Ω"
+  },
+  "R2": {
+   "tip": "R",
+   "db": "RES-03",
+   "değer": "10 kΩ",
+   "fit": "full",
+   "not": "GPIO25 aşağı çekme: açılışta/yüklemede şerit titremesi olmasın",
+   "sınıf": "E1",
+   "blok": "B2",
+   "ad": "AŞAĞI ÇEKME",
+   "görev": "Açılışta DATA ağını GND'de tutar.",
+   "elde": "elde",
+   "değer_kısa": "10 kΩ"
+  },
+  "U1": {
+   "tip": "ESP32_DEVKIT38",
+   "db": "MOD-01",
+   "değer": "ESP32 DevKit 38 pin",
+   "fit": "base",
+   "not": "Doğrudan plakete lehim (dişi header yok). Kullanılan pinler + mekanik çapa pinleri lehimlenir.",
+   "sınıf": "Z",
+   "blok": "B3",
+   "ad": "ESP32 DEVKIT 38 PİN",
+   "görev": "Sesi okur; ekranı ve şeridi sürer.",
+   "elde": "elde",
+   "değer_kısa": "DevKit · 38 pin"
+  },
+  "R3": {
+   "tip": "R",
+   "db": "On-hand resistor",
+   "değer": "47 Ω",
+   "fit": "full",
+   "not": "Konum: ESP32 pinine EN YAKIN. Kenar akımını azaltır (etkisi ölçülmedi; yazılımda `drive 0` var)",
+   "sınıf": "E1",
+   "blok": "B3",
+   "ad": "SERİ DİRENÇ SCK",
+   "görev": "SCK kenar akımını azaltır.",
+   "elde": "elde",
+   "konum": "Near U1",
+   "değer_kısa": "47 Ω"
+  },
+  "R4": {
+   "tip": "R",
+   "db": "On-hand resistor",
+   "değer": "47 Ω",
+   "fit": "full",
+   "not": "Konum: ESP32 pinine EN YAKIN. Kenar akımını azaltır (etkisi ölçülmedi; yazılımda `drive 0` var)",
+   "sınıf": "E1",
+   "blok": "B3",
+   "ad": "SERİ DİRENÇ SDA",
+   "görev": "SDA kenar akımını azaltır.",
+   "elde": "elde",
+   "konum": "Near U1",
+   "değer_kısa": "47 Ω"
+  },
+  "R5": {
+   "tip": "R",
+   "db": "On-hand resistor",
+   "değer": "47 Ω",
+   "fit": "full",
+   "not": "Konum: ESP32 pinine EN YAKIN. Kenar akımını azaltır (etkisi ölçülmedi; yazılımda `drive 0` var)",
+   "sınıf": "E1",
+   "blok": "B3",
+   "ad": "SERİ DİRENÇ DC",
+   "görev": "DC kenar akımını azaltır.",
+   "elde": "elde",
+   "konum": "Near U1",
+   "değer_kısa": "47 Ω"
+  },
+  "DSP1": {
+   "tip": "TFT_ST7789",
+   "db": "MOD-02",
+   "değer": "ST7789 1,3″",
+   "fit": "base",
+   "offboard": true,
+   "not": "7 telli Dupont kuyruğu",
+   "sınıf": "Z",
+   "blok": "B3",
+   "ad": "ST7789 EKRAN",
+   "görev": "Spektrum ve durumu gösterir.",
+   "elde": "elde",
+   "değer_kısa": "1,3″ · 240×240"
+  },
+  "FB1": {
+   "tip": "FERRITE",
+   "db": "On-hand axial ferrite; K2 identity gate",
+   "değer": "Axial ferrit ≥0.5 A · 30–600 Ω at 100 MHz",
+   "fit": "full",
+   "sınıf": "E2",
+   "blok": "B3",
+   "not": "Through-hole axial; exact impedance and DCR unverified. Only screen/IR branch, never the V5 backbone.",
+   "ad": "SCREEN FERRITE",
+   "görev": "Separates display current transients.",
+   "elde": "elde",
+   "konum": "Before C6",
+   "değer_kısa": "Axial ferrite"
+  },
+  "C6": {
+   "tip": "C_ELEC",
+   "db": "CAP-02",
+   "değer": "10 µF / 16 V",
+   "fit": "full",
+   "sınıf": "E1",
+   "blok": "B3",
+   "v_maks": 16,
+   "not": "Ekran VCC yerel dekuplaj (ferrit varsa onun arkasında)",
+   "ad": "EKRAN 10 µF",
+   "görev": "Ekran akım darbesini yerelde tutar.",
+   "elde": "elde",
+   "değer_kısa": "10 µF · 16 V"
+  },
+  "MIC1": {
+   "tip": "MIC_MAX4466",
+   "db": "MOD-03",
+   "değer": "MAX4466 modülü",
+   "fit": "base",
+   "offboard": true,
+   "not": "3 telli Dupont kuyruğu; kazanç trimpotu erişilebilir kalır",
+   "sınıf": "Z",
+   "blok": "B4",
+   "ad": "MAX4466 MİKROFON",
+   "görev": "Sesi 0–3,3 V sinyale çevirir.",
+   "elde": "elde",
+   "değer_kısa": "MAX4466"
+  },
+  "R7": {
+   "tip": "R",
+   "db": "On-hand resistor",
+   "değer": "47 Ω",
+   "fit": "full",
+   "not": "At 2 mA: 94 mV drop; R7/C4 cutoff approximately 339 Hz.",
+   "sınıf": "E1",
+   "blok": "B4",
+   "ad": "FİLTRE KONUMU",
+   "görev": "Mikrofon 3V3 beslemesini süzer.",
+   "elde": "elde",
+   "konum": "Microphone supply filter",
+   "değer_kısa": "47 Ω"
+  },
+  "C4": {
+   "tip": "C_ELEC",
+   "db": "CAP-02",
+   "değer": "10 µF / 16 V",
+   "fit": "full",
+   "v_maks": 16,
+   "not": "Microphone local bulk",
+   "sınıf": "E1",
+   "blok": "B4",
+   "ad": "FİLTRE 10 µF",
+   "görev": "Düşük frekans gürültüsünü süzer.",
+   "elde": "elde",
+   "değer_kısa": "10 µF · 16 V"
+  },
+  "C5": {
+   "tip": "C",
+   "db": "CAP-03",
+   "değer": "47 nF",
+   "fit": "full",
+   "not": "Mikrofon VCC yüksek frekans",
+   "sınıf": "E1",
+   "blok": "B4",
+   "ad": "FİLTRE 47 nF",
+   "görev": "Yüksek frekans gürültüsünü süzer.",
+   "elde": "elde",
+   "değer_kısa": "47 nF"
+  },
+  "R6": {
+   "tip": "R",
+   "db": "RES-04",
+   "değer": "1 kΩ",
+   "fit": "base",
+   "not": "Mikrofon ADC anti-alias direnci (breadboard'dan taşınır)",
+   "sınıf": "Z",
+   "blok": "B4",
+   "ad": "ADC DİRENCİ",
+   "görev": "C3 ile ADC girişi süzgecini kurar.",
+   "elde": "elde",
+   "değer_kısa": "1 kΩ"
+  },
+  "C3": {
+   "tip": "C",
+   "db": "CAP-04",
+   "değer": "10 nF",
+   "fit": "base",
+   "not": "ADC düğümü – AGND; fc ≈ 16 kHz",
+   "sınıf": "Z",
+   "blok": "B4",
+   "ad": "ADC KONDANSATÖRÜ",
+   "görev": "R6 ile 16 kHz üstünü keser.",
+   "elde": "elde",
+   "değer_kısa": "10 nF"
+  },
+  "IR1": {
+   "tip": "IR_RX3",
+   "db": "MOD-04/05 (IR kit)",
+   "değer": "IR alıcı modülü",
+   "fit": "base",
+   "offboard": true,
+   "not": "Özellik. Robolink IR kit: alıcı modül (3 pin) + 17 tuşlu kumanda + IR LED (verici, kullanılmaz). Pin sırası modül baskısından okunmalı",
+   "sınıf": "Ö",
+   "blok": "B5",
+   "ad": "IR ALICI",
+   "görev": "Kumanda IR sinyalini okur.",
+   "elde": "elde",
+   "değer_kısa": "38 kHz · 3 pin"
+  },
+  "SK1": {
+   "tip": "SOCKET_DIP14",
+   "db": "E2 (elde, DIP-14 teyidi gerekli)",
+   "değer": "DIP-14 IC soketi",
+   "fit": "full",
+   "not": "Önce soketi lehimle, çipi sonra tak. HC00 ile HCT00 lehim çözmeden değişir",
+   "sınıf": "E2",
+   "blok": "B2",
+   "ad": "74HC00 SOKETİ",
+   "görev": "U2'yi lehimsiz değiştirmeyi sağlar.",
+   "elde": "elde",
+   "değer_kısa": "DIP-14"
+  },
+  "C7": {
+   "tip": "C_ELEC",
+   "değer": "100 µF / 16 V",
+   "değer_kısa": "100 µF · 16 V",
+   "fit": "full",
+   "sınıf": "E1",
+   "blok": "B3",
+   "elde": "elde",
+   "ad": "Controller bulk",
+   "görev": "Local ESP5V transient supply",
+   "v_maks": 16,
+   "not": "Near U1 and D2; local return to U1.GND_T5. Does not repair regulator headroom."
+  },
+  "ANT1": {
+   "tip": "ANTENNA",
+   "değer": "2.4 GHz / 50 Ω antenna",
+   "değer_kısa": "2.4 GHz · 50 Ω",
+   "fit": "full",
+   "sınıf": "Ö",
+   "blok": "B5",
+   "elde": "elde",
+   "offboard": true,
+   "ad": "External antenna",
+   "görev": "U1 RF connection, not a GPIO/DC net",
+   "not": "K6 verifies u.FL compatibility; no PCB trace cutting.",
+   "rf": "U1.uFL"
+  }
+ },
+ "nets": {
+  "PSU_P": {
+   "sınıf": "güç",
+   "pinler": [
+    "PSU1.+5V",
+    "J1.1",
+    "F1.1"
+   ],
+   "imax_a": 3.8,
+   "min_mm2": 1.5,
+   "açıklama": "PSU + output before the fuse: PSU lead in J1.1 plug screw, J1.1 pin tail to F1.1; J1.2 spare"
+  },
+  "FUSED": {
+   "sınıf": "güç",
+   "pinler": [
+    "F1.2",
+    "SW1.1",
+    "D1.K"
+   ],
+   "imax_a": 3.8,
+   "min_mm2": 1.5,
+   "dallar": [
+    {"pinler": ["D1.K"], "mm2": 0.205, "imax_a": 0.0, "açıklama": "D1 reverse-polarity branch from the SW1.1 lug; carries current only in a fault"}
+   ],
+   "açıklama": "After the fuse, before the rocker; 1.5 mm² backbone, one 24 AWG branch to D1.K"
+  },
+  "V5": {
+   "sınıf": "güç",
+   "pinler": [
+    "SW1.2",
+    "J2.3",
+    "STRIP1.+5V",
+    "C1.+",
+    "D4.A",
+    "D2.A"
+   ],
+   "imax_a": 3.8,
+   "min_mm2": 1.5,
+   "dallar": [
+    {"pinler": ["D2.A", "D4.A"], "mm2": 0.205, "imax_a": 0.6, "açıklama": "24 AWG feed from the SW1.2 lug: controller 0.6 A through D2, HC supply 0.5 mA through D4"}
+   ],
+   "açıklama": "Switched backbone after F1 and SW1; one 24 AWG board feed"
+  },
+  "GND": {
+   "sınıf": "güç",
+   "pinler": [
+    "PSU1.COM",
+    "J1.3",
+    "J1.4",
+    "J2.1",
+    "STRIP1.GND",
+    "C1.-",
+    "D1.A",
+    "U2.7",
+    "U2.9",
+    "U2.10",
+    "U2.12",
+    "U2.13",
+    "C2.2",
+    "R2.2",
+    "U1.GND_T5",
+    "C7.-"
+   ],
+   "imax_a": 3.8,
+   "min_mm2": 1.5,
+   "dallar": [
+    {"pinler": ["D1.A", "U2.7", "U2.9", "U2.10", "U2.12", "U2.13", "C2.2", "R2.2", "U1.GND_T5", "C7.-"], "mm2": 0.205, "imax_a": 0.6,
+     "açıklama": "One 24 AWG feed from the J1.4 tail into a single on-board chain"}
+   ],
+   "açıklama": "J1.3 pin star; 1.5 mm² strip return J2.1 to J1.3; controller and logic through one 24 AWG feed from J1.4 and an on-board chain"
+  },
+  "DGND": {
+   "sınıf": "dijital",
+   "pinler": [
+    "U1.GND_B12",
+    "DSP1.GND",
+    "IR1.GND",
+    "C6.-"
+   ],
+   "imax_a": 0.1,
+   "min_mm2": 0.205,
+   "açıklama": "Display/IR return only to U1.GND_B12"
+  },
+  "AGND": {
+   "sınıf": "analog",
+   "pinler": [
+    "U1.GND_B18",
+    "MIC1.GND",
+    "C3.2",
+    "C4.-",
+    "C5.2"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "Mikrofon analog dönüşü: yalnız U1.GND_B18 pininde (anten ucu, mikrofon süzgeci hizası); ekran ve şerit akımıyla ortak segmenti YOK"
+  },
+  "V33": {
+   "sınıf": "güç",
+   "pinler": [
+    "U1.3V3",
+    "R7.1",
+    "FB1.1"
+   ],
+   "imax_a": 0.08,
+   "min_mm2": 0.205,
+   "açıklama": "ESP32 3V3 (kart regülatörü): mikrofon süzgeci (R7) ve FB1 girişi"
+  },
+  "V33_MIC": {
+   "sınıf": "analog",
+   "pinler": [
+    "R7.2",
+    "C4.+",
+    "C5.1",
+    "MIC1.VCC"
+   ],
+   "imax_a": 0.002,
+   "min_mm2": 0.205,
+   "açıklama": "Süzgeçli mikrofon beslemesi"
+  },
+  "MIC_OUT": {
+   "sınıf": "analog",
+   "pinler": [
+    "MIC1.OUT",
+    "R6.1"
+   ],
+   "imax_a": 0.001,
+   "min_mm2": 0.205,
+   "açıklama": "Mikrofon çıkışı (bias ≈ 1,65 V)"
+  },
+  "ADC": {
+   "sınıf": "analog",
+   "pinler": [
+    "C3.1",
+    "R6.2",
+    "U1.IO34"
+   ],
+   "imax_a": 0.001,
+   "min_mm2": 0.205,
+   "açıklama": "ADC1_CH6 girişi: 1 kΩ + 10 nF sonrası; R6.2 merkez: C3.1 ve U1.IO34 yan yana, ADC teli bir delik (2,54 mm)"
+  },
+  "DATA": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO25",
+    "U2.1",
+    "U2.2",
+    "R2.1"
+   ],
+   "imax_a": 0.001,
+   "min_mm2": 0.205,
+   "açıklama": "GPIO25 → 74HC00 kapı 1 girişleri (3,3 V mantık)"
+  },
+  "N1": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U2.3",
+    "U2.4",
+    "U2.5"
+   ],
+   "imax_a": 0.001,
+   "min_mm2": 0.205,
+   "açıklama": "Kapı 1 çıkışı → kapı 2 girişleri"
+  },
+  "N2": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U2.6",
+    "R1.1"
+   ],
+   "imax_a": 0.01,
+   "min_mm2": 0.205,
+   "açıklama": "Kapı 2 çıkışı (≈ Vcc seviyeli)"
+  },
+  "DIN": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "R1.2",
+    "J2.2",
+    "STRIP1.DIN"
+   ],
+   "imax_a": 0.001,
+   "min_mm2": 0.205,
+   "açıklama": "Şerit veri girişi (220 Ω sonrası)"
+  },
+  "VH1": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "D4.K",
+    "D5.A"
+   ],
+   "imax_a": 0.0005,
+   "min_mm2": 0.205,
+   "açıklama": "İlk diyot sonrası"
+  },
+  "VCC_H": {
+   "sınıf": "güç",
+   "pinler": [
+    "D5.K",
+    "U2.14",
+    "C2.1"
+   ],
+   "imax_a": 0.0005,
+   "min_mm2": 0.205,
+   "açıklama": "74HC00 VCC; T4 kabulü 3,6–4,2 V, hesap aralığı kabul yerine geçmez"
+  },
+  "IR_OUT": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO16",
+    "IR1.OUT"
+   ],
+   "imax_a": 0.0005,
+   "min_mm2": 0.205,
+   "açıklama": "IR demodüle çıkış"
+  },
+  "SCK_E": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO18",
+    "R3.1"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "SPI SCK, ESP32 ucu"
+  },
+  "SCK": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "R3.2",
+    "DSP1.SCK"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "SPI SCK, ekran ucu"
+  },
+  "SDA_E": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO23",
+    "R4.1"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "SPI MOSI, ESP32 ucu"
+  },
+  "SDA": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "R4.2",
+    "DSP1.SDA"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "SPI MOSI, ekran ucu"
+  },
+  "DC_E": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO21",
+    "R5.1"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "DC, ESP32 ucu"
+  },
+  "DC": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "R5.2",
+    "DSP1.DC"
+   ],
+   "imax_a": 0.005,
+   "min_mm2": 0.205,
+   "açıklama": "DC, ekran ucu"
+  },
+  "RES": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO22",
+    "DSP1.RES"
+   ],
+   "imax_a": 0.001,
+   "min_mm2": 0.205,
+   "açıklama": "Ekran reset"
+  },
+  "BLK": {
+   "sınıf": "sinyal",
+   "pinler": [
+    "U1.IO19",
+    "DSP1.BLK"
+   ],
+   "imax_a": 0.025,
+   "min_mm2": 0.205,
+   "açıklama": "Arka ışık (GPIO19), sabit HIGH (PWM'siz) [doğrulanmadı: modül giriş akımı]"
+  },
+  "ESP5V": {
+   "sınıf": "güç",
+   "pinler": [
+    "D2.K",
+    "U1.5V",
+    "C7.+"
+   ],
+   "imax_a": 0.6,
+   "min_mm2": 0.205,
+   "açıklama": "24 AWG controller feed (0.6 A, table limit 1.7 A) from the perfboard V5 feed through D2; C7 at U1.5V"
+  },
+  "V33_DSP": {
+   "sınıf": "güç",
+   "pinler": [
+    "FB1.2",
+    "DSP1.VCC",
+    "C6.+",
+    "IR1.VCC"
+   ],
+   "imax_a": 0.062,
+   "min_mm2": 0.205,
+   "açıklama": "Ekran ve IR 3V3 (ferrit/bobin konumu FB1 sonrası, C6 ile süzülmüş)"
+  }
+ },
+ "kullanım": {
+  "U1.IO25": "out",
+  "U1.IO34": "in",
+  "U1.IO16": "in",
+  "U1.IO18": "out",
+  "U1.IO23": "out",
+  "U1.IO21": "out",
+  "U1.IO22": "out",
+  "U1.IO19": "out"
+ },
+ "bağlantısız_tamam": [
+  "U2.8",
+  "U2.11",
+  "J2.4"
+  ,"U1.IO4"
+  ,"J1.2"
+ ],
+ "gösterge": {
+  "açıklama": "Devre şeması, ölçüm noktaları ve test tablosunda kullanılan adlandırılmış ölçüm noktaları (delik yerleşimi layout.py'de)",
+  "test_noktaları": {
+   "TP_GND": "J1.3",
+   "TP_PSU": "J1.1",
+   "TP_FUSED": "F1.2",
+   "TP_V5": "J2.3",
+   "TP_VCCH": "U2.14",
+   "TP_DIN": "J2.2",
+   "TP_3V3": "U1.3V3",
+   "TP_ESP5V": "U1.5V",
+   "TP_ADC": "U1.IO34",
+   "TP_MICVCC": "MIC1.VCC"
+  }
+ },
+ "gnd_yıldız": {
+  "açıklama": "GND topology: one net, ONE star point = the J1.3 pin (PSU COM plug screw; J1.3 and J1.4 pin tails joined by a jumper). The strip return arrives at the J1.3 tail with 1.5 mm²; the controller and logic (mA) leave from the J1.4 tail on one 24 AWG board feed; DGND and AGND meet only at their own ESP32 GND pins.",
+  "nokta": [
+   "PSU1.COM",
+   "J1.3",
+   "J1.4"
+  ],
+  "kollar": {
+   "şerit": {
+    "ad": "ŞERİT KOLU",
+    "tel": "1.5 mm² external harness",
+    "imax_a": 3.8,
+    "pinler": [
+     "J2.1",
+     "STRIP1.GND",
+     "C1.-"
+    ]
+   },
+   "mantık": {
+    "ad": "MANTIK KOLU",
+    "tel": "24 AWG board feed (0.6 A) from the J1.4 tail; daisy chain on the perfboard, D1.A first",
+    "imax_a": 0.6,
+    "pinler": [
+     "D1.A",
+     "U1.GND_T5",
+     "U2.7",
+     "U2.9",
+     "U2.10",
+     "U2.12",
+     "U2.13",
+     "C2.2",
+     "R2.2"
+     ,"C7.-"
+    ]
+   }
+  },
+  "esp_gnd_pinleri": {
+   "GND": "U1.GND_T5",
+   "DGND": "U1.GND_B12",
+   "AGND": "U1.GND_B18"
+  }
+ }
+}

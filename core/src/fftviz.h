@@ -1,0 +1,17 @@
+// fftviz.h — fvcore umbrella include.
+#pragma once
+#include "fv_types.h"
+#include "fv_config.h"
+#include "fv_params.h"
+#include "fv_math.h"
+#include "fv_tables.h"
+#include "fv_vis_tables.h"
+#include "fv_decim.h"
+#include "fv_fft.h"
+#include "fv_bands.h"
+#include "fv_analyzer.h"
+#include "fv_color.h"
+#include "fv_leds.h"
+#include "fv_screen.h"
+#include "fv_synth.h"
+#include "fv_engine.h"
